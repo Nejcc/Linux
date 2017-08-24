@@ -1,0 +1,13 @@
+#!/bin/bash
+function addDB {
+    sudo mysql -u root -p
+    
+    # replace "-" with "_" for database username
+    MAINDB=${$2//[^a-zA-Z0-9]/_}
+    
+    connect_mysql -e "CREATE DATABASE ${MAINDB} /*\!40100 DEFAULT CHARACTER SET utf8 */;"
+    connect_mysql -e "CREATE USER ${MAINDB}@localhost IDENTIFIED BY '${PASSWDDB}';"
+    connect_mysql -e "GRANT ALL PRIVILEGES ON ${MAINDB}.* TO '${MAINDB}'@'localhost';"
+    connect_mysql -e "FLUSH PRIVILEGES;"
+}
+addDB $1
