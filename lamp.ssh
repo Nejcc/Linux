@@ -1,0 +1,55 @@
+#!/bin/bash
+
+function apache2Install {
+  # Install apache2
+  sudo apt-get install apache2 -y
+  sudo a2enmod rewrite
+    if [ -f "/etc/apache2/sites-available/temp.conf" ]; then
+        sudo sed -i "s,/var/www/html,/var/www/$1,g" /etc/apache2/sites-available/temp.conf    #s = search   g = konec stavka $1 = prvi argument
+    fi
+ sudo /etc/init.d/apache2 reload
+}
+
+function mysqlInstall {
+  # Install apache2
+  sudo apt-get install mysql-server -y
+  sudo mysql_config_editor set --login-path=local --user=root -p
+  echo "alias connect_mysql='mysql --login-path=local'" >> ~/.bashrc
+}
+
+function phpRepo {
+    sudo add-apt-repository ppa:ondrej/php5-5.6
+    sudo apt-get update
+}
+
+function phpInstall {
+  # Install apache2
+  sudo apt-get install php5.6 php5.6-mbstring php5.6-mcrypt php5.6-mysql php5.6-xml php5.6-fpm php5.6-curl php5.6-pdo -y
+}
+
+function composerInstall {
+  # Install apache2
+  sudo apt-get install composer -y
+}
+
+function gitInstall {
+  # Install apache2
+  sudo apt-get install git -y
+}
+
+function certbotInstall {
+  # Certbot
+  sudo apt-get install software-properties-common -y && sudo add-apt-repository ppa:certbot/certbot -y && sudo apt-get update && sudo apt-get install python-certbot-apache -y
+  sudo echo '43 6 * * * certbot renew --post-hook "systemctl reload apache2"' >> /etc/crontab
+}
+
+#install all
+apache2Install $1
+mysqlInstall
+phpRepo
+phpInstall
+certbotInstall
+composerInstall
+gitInstall
+
+sudo /etc/init.d/apache2 reload
