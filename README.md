@@ -1,16 +1,16 @@
 # Linux
 
-#### 1 Run lamp.shh
-##### command: lamp.ssh __domain_name__
+#### 1. Run lamp.shh
+command: lamp.ssh __domain_name__
 
-#### 2 wget 000-default.conf
+#### 2. wget 000-default.conf
 ##### command: 
 
-#### 3 wget default-ssh.conf
+#### 3. wget default-ssh.conf
 ##### command:
 
-#### 4 Run certbot.sh 
+#### 4. Run certbot.sh 
 ##### command: certbot.sh __domain_name__
 
-#### 5 Run addDB.sh
+#### 5. Run addDB.sh
 ##### command: addDBssh __database_name__
