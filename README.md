@@ -1,4 +1,4 @@
-# Linux
+# Linux - LAMP  apache2 php5.6 certbot mysql composer git
 
 #### 1. Run lamp.shh
 command: lamp.ssh __domain_name__
